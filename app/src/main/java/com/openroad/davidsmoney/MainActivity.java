@@ -43,8 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveData(View view) {
         Intent intent = new Intent(this, SaveDataActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
+        EditText editAmount = (EditText) findViewById(R.id.editAmount);
+        EditText editDescription = (EditText) findViewById(R.id.editDescription);
+        String message = "$" + editAmount.getText().toString() + " to " + editDescription.getText().toString();
         intent.putExtra(DATA_SAVED_CONFIRMATION, message);
         startActivity(intent);
     }
