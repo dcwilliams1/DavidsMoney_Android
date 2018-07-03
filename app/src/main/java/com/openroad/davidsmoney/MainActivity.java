@@ -7,16 +7,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     public static final String DATA_SAVED_CONFIRMATION = "com.openroad.davidsmoney.DATA_SAVED_CONFIRMATION";
+    ListView simpleList;
+    String budgetCategories[] = {"Big Toys","Clothes","Dakshina" ,"Entertainment", "Food","Home Maintenance","Staples"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        Spinner categoryDropdown = (Spinner) findViewById(R.id.editCategory);
+        categoryDropdown.setOnItemSelectedListener(this);
+        ArrayAdapter<String> categoryArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, budgetCategories);
+        categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoryDropdown.setAdapter(categoryArrayAdapter);
     }
 
     @Override
@@ -45,8 +60,24 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SaveDataActivity.class);
         EditText editAmount = (EditText) findViewById(R.id.editAmount);
         EditText editDescription = (EditText) findViewById(R.id.editDescription);
-        String message = "$" + editAmount.getText().toString() + " to " + editDescription.getText().toString();
+        Spinner editCategory = (Spinner) findViewById(R.id.editCategory);
+        Bundle dataBundle = new Bundle();
+        dataBundle.putString("amount", editAmount.getText().toString());
+        dataBundle.putString("description", editDescription.getText().toString());
+        dataBundle.putString("category", editCategory.getSelectedItem().toString());
+        intent.putExtras(dataBundle);
+        String message = new StringBuilder().append("Saved $").append(editAmount.getText().toString()).append(" to\n").append(editCategory.getSelectedItem().toString()).append(" for\n").append(editDescription.getText().toString()).toString();
         intent.putExtra(DATA_SAVED_CONFIRMATION, message);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        Toast.makeText(getApplicationContext(), budgetCategories[position], Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

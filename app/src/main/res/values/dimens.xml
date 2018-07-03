@@ -1,3 +1,4 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="category_horizontal_margin">5dp</dimen>
 </resources>
