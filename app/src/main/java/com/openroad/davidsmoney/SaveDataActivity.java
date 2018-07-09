@@ -7,15 +7,19 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class SaveDataActivity extends AppCompatActivity {
-    AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-            AppDatabase.class, "database-name").build();
+    MoneyDatabase db = Room.databaseBuilder(getApplicationContext(),
+            MoneyDatabase.class, "money_database").build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_data);
-        // Get the Intent that started this activity and extract the string
+        // Get the Intent that started this activity and extract the data
         Intent intent = getIntent();
+        String amount = intent.getStringExtra("amount");
+        String description = intent.getStringExtra("description");
+        String category = intent.getStringExtra("category");
+
         String message = intent.getStringExtra(MainActivity.DATA_SAVED_CONFIRMATION);
 
         // Capture the layout's TextView and set the string as its text
