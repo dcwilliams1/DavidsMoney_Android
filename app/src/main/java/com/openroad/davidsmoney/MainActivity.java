@@ -56,17 +56,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return super.onOptionsItemSelected(item);
     }
 
+
     public void saveData(View view) {
         Intent intent = new Intent(this, SaveDataActivity.class);
         EditText editAmount = (EditText) findViewById(R.id.editAmount);
         EditText editDescription = (EditText) findViewById(R.id.editDescription);
         Spinner editCategory = (Spinner) findViewById(R.id.editCategory);
+        EditText editDate = (EditText) findViewById(R.id.editDate);
         Bundle dataBundle = new Bundle();
         dataBundle.putString("amount", editAmount.getText().toString());
         dataBundle.putString("description", editDescription.getText().toString());
         dataBundle.putString("category", editCategory.getSelectedItem().toString());
+        dataBundle.putString("date", editDate.getText().toString());
         intent.putExtras(dataBundle);
-        String message = new StringBuilder().append("Saved $").append(editAmount.getText().toString()).append(" to\n").append(editCategory.getSelectedItem().toString()).append(" for\n").append(editDescription.getText().toString()).toString();
+        String message = new StringBuilder().append("Saved $").append(editAmount.getText().toString()).append(" to\n").append(editCategory.getSelectedItem().toString()).append(" - \n").append(editDescription.getText().toString()).toString();
         intent.putExtra(DATA_SAVED_CONFIRMATION, message);
         startActivity(intent);
     }

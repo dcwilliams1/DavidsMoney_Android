@@ -19,11 +19,11 @@ public class SaveDataActivity extends AppCompatActivity {
         String amount = intent.getStringExtra("amount");
         String description = intent.getStringExtra("description");
         String category = intent.getStringExtra("category");
-
+        String date = intent.getStringExtra("date");
         String message = intent.getStringExtra(MainActivity.DATA_SAVED_CONFIRMATION);
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView);
+        TextView textView = findViewById(R.id.textView2);
         textView.setText(message);
     }
 
