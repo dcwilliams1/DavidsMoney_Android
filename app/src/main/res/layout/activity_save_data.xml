@@ -7,11 +7,11 @@
     tools:context=".SaveDataActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/ConfirmationMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
         android:textColor="@android:color/white"

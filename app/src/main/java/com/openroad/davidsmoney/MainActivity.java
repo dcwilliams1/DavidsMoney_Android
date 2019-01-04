@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    public static final String DATA_SAVED_CONFIRMATION = "com.openroad.davidsmoney.DATA_SAVED_CONFIRMATION";
     ListView simpleList;
     String budgetCategories[] = {"Big Toys","Clothes","Dakshina" ,"Entertainment", "Food","Home Maintenance","Staples"};
 
@@ -69,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         dataBundle.putString("category", editCategory.getSelectedItem().toString());
         dataBundle.putString("date", editDate.getText().toString());
         intent.putExtras(dataBundle);
-        String message = new StringBuilder().append("Saved $").append(editAmount.getText().toString()).append(" to\n").append(editCategory.getSelectedItem().toString()).append(" - \n").append(editDescription.getText().toString()).toString();
-        intent.putExtra(DATA_SAVED_CONFIRMATION, message);
+
+
         startActivity(intent);
     }
 
