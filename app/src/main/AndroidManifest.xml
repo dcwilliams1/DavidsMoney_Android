@@ -19,11 +19,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SaveDataActivity"
-                  android:parentActivityName=".MainActivity">
+        <activity
+            android:name=".SaveDataActivity"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".DataList"
+            android:label="@string/title_activity_list_data"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.openroad.davidsmoney.MainActivity" />
         </activity>
     </application>
 

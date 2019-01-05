@@ -4,7 +4,11 @@
     tools:context="com.openroad.davidsmoney.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="500"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/data_list"
+        android:orderInCategory="101"
+        android:title="View Budget Items" />
 </menu>

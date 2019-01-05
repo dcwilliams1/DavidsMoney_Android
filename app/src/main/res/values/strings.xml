@@ -6,4 +6,5 @@
     <string name="edit_description">Description</string>
     <string name="edit_category">Category</string>
     <string name="edit_date">Date</string>
+    <string name="title_activity_list_data">View Budget Data</string>
 </resources>
