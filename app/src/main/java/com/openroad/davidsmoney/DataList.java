@@ -18,7 +18,7 @@ public class DataList extends AppCompatActivity {
     private RecyclerView dataListRecycler;
     private RecyclerView.Adapter dataListAdapter;
     private RecyclerView.LayoutManager dataListLayoutMgr;
-    private String[] dataSet = new String[] {"one", "two", "three"};
+    private String[] budgetItemDataset = new String[]{"one", "two", "three"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,37 +32,51 @@ public class DataList extends AppCompatActivity {
         dataListRecycler.setHasFixedSize(true);
 
         dataListLayoutMgr = new LinearLayoutManager(this);
+        dataListAdapter = new BudgetItemAdapter(budgetItemDataset);
+
         dataListRecycler.setLayoutManager(dataListLayoutMgr);
-
-        dataListAdapter = new RecyclerView.Adapter() {
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-                TextView budgetItemView  = (TextView) LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_text_view, parent, false);
-                RecyclerView.ViewHolder budgetItemViewHolder = new RecyclerView.ViewHolder(budgetItemView) {
-                    @Override
-                    public String toString() {
-                        return super.toString();
-                    }
-                };
-                return budgetItemViewHolder;
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                
-            }
-
-            @Override
-            public int getItemCount() {
-                return 0;
-            }
-
-
-        };
-
         dataListRecycler.setAdapter(dataListAdapter);
     }
 
+    public class BudgetItemAdapter extends RecyclerView.Adapter<BudgetItemAdapter.BudgetItemViewHolder> {
+        private String[] budgetItemDataset;
+
+        public class BudgetItemViewHolder extends RecyclerView.ViewHolder {
+            public TextView budgetItemTextView;
+
+            public BudgetItemViewHolder(View itemView) {
+                super(itemView);
+                budgetItemTextView = itemView.findViewById(R.id.item_text_view);
+            }
+        }
+
+        public BudgetItemAdapter(String[] BudgetItemDataSet) {
+            budgetItemDataset = BudgetItemDataSet;
+        }
+
+
+        public BudgetItemAdapter.BudgetItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View budgetItemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_list_layout, parent, false);
+            BudgetItemViewHolder budgetItemViewHolder = new BudgetItemViewHolder(budgetItemView);
+
+            return budgetItemViewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull BudgetItemViewHolder viewHolder, int position) {
+            TextView itemView = viewHolder.budgetItemTextView;
+            itemView.setText("one item again");
+        }
+
+        @Override
+        public int getItemCount() {
+            return budgetItemDataset.length;
+        }
+    }
 }
+
+
+
+
+
