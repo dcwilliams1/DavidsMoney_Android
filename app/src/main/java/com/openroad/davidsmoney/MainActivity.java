@@ -1,5 +1,6 @@
 package com.openroad.davidsmoney;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +10,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     ListView simpleList;
     String budgetCategories[] = {"Big Toys","Clothes","Dakshina" ,"Entertainment", "Food","Home Maintenance","Staples"};
+    final Calendar dateCalendar = Calendar.getInstance();
+    EditText editDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<String> categoryArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, budgetCategories);
         categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoryDropdown.setAdapter(categoryArrayAdapter);
+
+        editDate = (EditText) findViewById(R.id.editDate);
+        editDate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                new DatePickerDialog(MainActivity.this, date, dateCalendar.get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH), dateCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
 
     @Override
@@ -81,5 +97,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+            dateCalendar.set(Calendar.YEAR, year);
+            dateCalendar.set(Calendar.MONTH, month);
+            dateCalendar.set(Calendar.DAY_OF_MONTH, day);
+            updateLabel();
+        }
+    };
+
+    private void updateLabel(){
+        String budgetDateFormat = "MM/dd/yyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(budgetDateFormat, Locale.US);
+        editDate.setText(sdf.format(dateCalendar.getTime()));
     }
 }
