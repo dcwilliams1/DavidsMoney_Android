@@ -2,10 +2,7 @@ package com.openroad.davidsmoney;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -42,11 +39,15 @@ public class DataList extends AppCompatActivity {
         private String[] budgetItemDataset;
 
         public class BudgetItemViewHolder extends RecyclerView.ViewHolder {
-            public TextView budgetItemTextView;
+            public TextView budgetItemDescriptionView;
+            public TextView budgetItemDateView;
+            public TextView budgetItemCategoryView;
 
             public BudgetItemViewHolder(View itemView) {
                 super(itemView);
-                budgetItemTextView = itemView.findViewById(R.id.item_text_view);
+                budgetItemDescriptionView = itemView.findViewById(R.id.item_description_view);
+                budgetItemDateView = itemView.findViewById(R.id.item_date_view);
+                budgetItemCategoryView = itemView.findViewById(R.id.item_category_view);
             }
         }
 
@@ -65,8 +66,12 @@ public class DataList extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull BudgetItemViewHolder viewHolder, int position) {
-            TextView itemView = viewHolder.budgetItemTextView;
-            itemView.setText("one item again");
+            TextView descriptionView = viewHolder.budgetItemDescriptionView;
+            descriptionView.setText(budgetItemDataset[position]);
+            TextView dateView = viewHolder.budgetItemDateView;
+            dateView.setText(budgetItemDataset[position]);
+            TextView categoryView = viewHolder.budgetItemCategoryView;
+            categoryView.setText(budgetItemDataset[position]);
         }
 
         @Override
