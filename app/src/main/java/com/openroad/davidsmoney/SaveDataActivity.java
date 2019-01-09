@@ -20,8 +20,7 @@ public class SaveDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final MoneyDatabase db = Room.databaseBuilder(getApplicationContext(),
-                MoneyDatabase.class, "money_database").build();
+        final MoneyDatabase db = MoneyDatabase.getDatabase(this);
         setContentView(R.layout.activity_save_data);
         // Get the Intent that started this activity and extract the data
         Intent intent = getIntent();
@@ -49,7 +48,7 @@ public class SaveDataActivity extends AppCompatActivity {
                 expense.setDescription(description);
                 expense.setCategory(category);
                 expense.setDate(expenseDate);
-                db.userDao().insertAll(expense);
+                db.userDao().insertBudgetLineItem(expense);
             }
         });
         dbThread.start();
@@ -60,9 +59,5 @@ public class SaveDataActivity extends AppCompatActivity {
         } catch (Exception ex){
             textView.setText(failureMessage + ex.getMessage());
         }
-
-
     }
-
-
 }

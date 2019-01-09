@@ -6,10 +6,12 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity
+@Entity(tableName = "BudgetLineItem")
 public class BudgetLineItem {
+    public static final String TABLE_NAME = "BudgetLineItem";
+
     @ColumnInfo(name="LineItemId")
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     private Integer _lineItemId;
 
     @ColumnInfo(name="Description")

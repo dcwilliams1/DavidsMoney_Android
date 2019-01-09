@@ -1,5 +1,7 @@
 package com.openroad.davidsmoney;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class DataList extends AppCompatActivity {
     private RecyclerView dataListRecycler;
     private RecyclerView.Adapter dataListAdapter;
     private RecyclerView.LayoutManager dataListLayoutMgr;
-    private String[] budgetItemDataset = new String[]{"one", "two", "three"};
+    private LiveData<List<BudgetLineItem>> budgetItemDataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,12 @@ public class DataList extends AppCompatActivity {
 
         dataListRecycler.setLayoutManager(dataListLayoutMgr);
         dataListRecycler.setAdapter(dataListAdapter);
+
+        FetchBudgetData();
     }
 
     public class BudgetItemAdapter extends RecyclerView.Adapter<BudgetItemAdapter.BudgetItemViewHolder> {
-        private String[] budgetItemDataset;
+        private LiveData<List<BudgetLineItem>> budgetItemDataset;
 
         public class BudgetItemViewHolder extends RecyclerView.ViewHolder {
             public TextView budgetItemDescriptionView;
@@ -51,7 +57,7 @@ public class DataList extends AppCompatActivity {
             }
         }
 
-        public BudgetItemAdapter(String[] BudgetItemDataSet) {
+        public BudgetItemAdapter(LiveData<List<BudgetLineItem>> BudgetItemDataSet) {
             budgetItemDataset = BudgetItemDataSet;
         }
 
@@ -67,17 +73,28 @@ public class DataList extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull BudgetItemViewHolder viewHolder, int position) {
             TextView descriptionView = viewHolder.budgetItemDescriptionView;
-            descriptionView.setText(budgetItemDataset[position]);
+            descriptionView.setText(budgetItemDataset.getValue().get(position).getDescription());
             TextView dateView = viewHolder.budgetItemDateView;
-            dateView.setText(budgetItemDataset[position]);
+            dateView.setText(budgetItemDataset.getValue().get(position).getDate().toString());
             TextView categoryView = viewHolder.budgetItemCategoryView;
-            categoryView.setText(budgetItemDataset[position]);
+            categoryView.setText(budgetItemDataset.getValue().get(position).getCategory());
         }
 
         @Override
         public int getItemCount() {
-            return budgetItemDataset.length;
+            if (budgetItemDataset != null) {
+                return budgetItemDataset.getValue().size();
+            } else {
+                return 0;
+            }
         }
+    }
+
+    private void FetchBudgetData(){
+        final MoneyDatabase db = MoneyDatabase.getDatabase(this);
+        final LiveData<List<BudgetLineItem>> data = db.userDao().getAll();
+        budgetItemDataset = data;
+        String test = "stop here";
     }
 }
 

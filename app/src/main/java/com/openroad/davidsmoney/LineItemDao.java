@@ -21,9 +21,12 @@ import java.util.List;
     BudgetLineItem findByDescription(String description);
 
     @Insert
-    void insertAll(BudgetLineItem... lineItem);
+    public long insertBudgetLineItem(BudgetLineItem item);
+
+    @Insert
+    public void insertAll(List<BudgetLineItem> lineItems);
 
     @Delete
-    void delete(BudgetLineItem lineItem);
+    public void delete(BudgetLineItem lineItem);
 
 }

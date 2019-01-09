@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 new DatePickerDialog(MainActivity.this, date, dateCalendar.get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH), dateCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+        editDate.requestFocus();
     }
 
     @Override
