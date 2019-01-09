@@ -7,20 +7,16 @@
     android:orientation="vertical"
     android:visibility="visible"
     >
-
     <TextView
-        android:id="@+id/item_description_view"
-        android:layout_width="match_parent"
+        android:id="@+id/item_date_view"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/item_date_view"
-        android:layout_marginBottom="7dp"
-        android:text="@string/description"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:typeface="normal"
-        android:visibility="visible"
-        app:fontFamily="sans-serif"
-        tools:text="Description" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/date"
+        android:textSize="8sp"
+        android:layout_alignParentTop="true"
+        android:ems="10" />
 
     <TextView
         android:id="@+id/item_category_view"
@@ -32,11 +28,6 @@
         android:layout_toEndOf="@+id/item_date_view"
         android:layout_toRightOf="@+id/item_date_view"
         android:text="@string/category"
-        android:textSize="12sp" />
-        android:textSize="8sp" />
-        android:layout_height="wrap_content"
-        android:text="Category"
-        android:textColor="@android:color/black"
         android:textSize="8sp"
         android:typeface="normal"
         android:visibility="visible"
@@ -44,16 +35,40 @@
         tools:text="Category" />
 
     <TextView
-        android:id="@+id/item_date_view"
-        android:layout_width="75dp"
+        android:id="@+id/item_amount_view"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/date"
-        android:textSize="12sp" />
-        android:layout_alignParentTop="true"
-        android:ems="10"
-        android:inputType="date"
-        android:textSize="8sp" />
+        android:layout_below="@+id/item_date_view"
+        android:text="@string/amount"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:typeface="normal"
+        android:visibility="visible"
+        app:fontFamily="sans-serif"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/item_description_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_category_view"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/item_amount_view"
+        android:layout_toRightOf="@+id/item_amount_view"
+        android:layout_marginBottom="7dp"
+        android:text="@string/description"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:typeface="normal"
+        android:visibility="visible"
+        app:fontFamily="sans-serif"
+        tools:text="Description" />
+
+
+
+
 
 </RelativeLayout>

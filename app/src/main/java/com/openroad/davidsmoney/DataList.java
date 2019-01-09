@@ -13,13 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Locale;
 
 public class DataList extends AppCompatActivity {
     private RecyclerView dataListRecycler;
     private RecyclerView.Adapter dataListAdapter;
     private RecyclerView.LayoutManager dataListLayoutMgr;
-    private LiveData<List<BudgetLineItem>> budgetItemDataset;
+    private List<BudgetLineItem> budgetItemDataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +34,7 @@ public class DataList extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        FetchBudgetData();
         dataListRecycler = (RecyclerView) findViewById(R.id.recycler_data_list);
         dataListRecycler.setHasFixedSize(true);
 
@@ -38,26 +44,28 @@ public class DataList extends AppCompatActivity {
         dataListRecycler.setLayoutManager(dataListLayoutMgr);
         dataListRecycler.setAdapter(dataListAdapter);
 
-        FetchBudgetData();
+
     }
 
     public class BudgetItemAdapter extends RecyclerView.Adapter<BudgetItemAdapter.BudgetItemViewHolder> {
-        private LiveData<List<BudgetLineItem>> budgetItemDataset;
+        private List<BudgetLineItem> budgetItemDataset;
 
         public class BudgetItemViewHolder extends RecyclerView.ViewHolder {
             public TextView budgetItemDescriptionView;
             public TextView budgetItemDateView;
             public TextView budgetItemCategoryView;
+            public TextView budgetItemAmountView;
 
             public BudgetItemViewHolder(View itemView) {
                 super(itemView);
                 budgetItemDescriptionView = itemView.findViewById(R.id.item_description_view);
                 budgetItemDateView = itemView.findViewById(R.id.item_date_view);
                 budgetItemCategoryView = itemView.findViewById(R.id.item_category_view);
+                budgetItemAmountView = itemView.findViewById(R.id.item_amount_view);
             }
         }
 
-        public BudgetItemAdapter(LiveData<List<BudgetLineItem>> BudgetItemDataSet) {
+        public BudgetItemAdapter(List<BudgetLineItem> BudgetItemDataSet) {
             budgetItemDataset = BudgetItemDataSet;
         }
 
@@ -72,18 +80,21 @@ public class DataList extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull BudgetItemViewHolder viewHolder, int position) {
+            TextView amountView = viewHolder.budgetItemAmountView;
+            amountView.setText("$" + budgetItemDataset.get(position).getAmount().toString());
             TextView descriptionView = viewHolder.budgetItemDescriptionView;
-            descriptionView.setText(budgetItemDataset.getValue().get(position).getDescription());
+            descriptionView.setText(budgetItemDataset.get(position).getDescription());
             TextView dateView = viewHolder.budgetItemDateView;
-            dateView.setText(budgetItemDataset.getValue().get(position).getDate().toString());
+            java.util.Date complexDate = budgetItemDataset.get(position).getDate();
+            dateView.setText(new SimpleDateFormat("M/d/yyyy", Locale.getDefault()).format(complexDate));
             TextView categoryView = viewHolder.budgetItemCategoryView;
-            categoryView.setText(budgetItemDataset.getValue().get(position).getCategory());
+            categoryView.setText(budgetItemDataset.get(position).getCategory());
         }
 
         @Override
         public int getItemCount() {
             if (budgetItemDataset != null) {
-                return budgetItemDataset.getValue().size();
+                return budgetItemDataset.size();
             } else {
                 return 0;
             }
@@ -92,7 +103,27 @@ public class DataList extends AppCompatActivity {
 
     private void FetchBudgetData(){
         final MoneyDatabase db = MoneyDatabase.getDatabase(this);
-        final LiveData<List<BudgetLineItem>> data = db.userDao().getAll();
+        final LiveData<List<BudgetLineItem>> results = db.userDao().getAll();
+        budgetItemDataset = (List<BudgetLineItem>)results.getValue();
+
+        List<BudgetLineItem> data = new ArrayList<BudgetLineItem>();
+
+        BudgetLineItem firstRecord = new BudgetLineItem();
+        firstRecord.setLineItemId(1);
+        firstRecord.setDate(new java.util.Date());
+        firstRecord.setAmount(new Long("1249"));
+        firstRecord.setCategory("Clothes");
+        firstRecord.setDescription("new record - bought some nice clothes to wear");
+        data.add(firstRecord);
+
+        BudgetLineItem secondRecord = new BudgetLineItem();
+        secondRecord.setLineItemId(2);
+        secondRecord.setDate(new java.util.Date());
+        secondRecord.setAmount(new Long("808"));
+        secondRecord.setCategory("Home Maintenance");
+        secondRecord.setDescription("stuff from Home Depot");
+        data.add(secondRecord);
+
         budgetItemDataset = data;
         String test = "stop here";
     }

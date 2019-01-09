@@ -10,4 +10,5 @@
     <string name="description">Description</string>
     <string name="category">Category</string>
     <string name="date">Date</string>
+    <string name="amount">Amount</string>
 </resources>
