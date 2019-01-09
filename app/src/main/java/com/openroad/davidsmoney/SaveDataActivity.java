@@ -40,7 +40,7 @@ public class SaveDataActivity extends AppCompatActivity {
         String successMessage = new StringBuilder().append("Saved $").append(amount).append("\n").append("to " + category).append("\n").append("for " + description).append("\n").append("on ").append(dateFormat.format(expenseDate)).toString();
         String failureMessage = new StringBuilder().append("Unable to save this expense to the database.").toString();
 
-        Thread dbThread = new Thread(new Runnable() {
+        Thread dbThread = new Thread() {
             @Override
             public void run() {
                 BudgetLineItem expense =  new BudgetLineItem();
@@ -50,7 +50,7 @@ public class SaveDataActivity extends AppCompatActivity {
                 expense.setDate(expenseDate);
                 db.userDao().insertBudgetLineItem(expense);
             }
-        });
+        };
         dbThread.start();
         TextView textView = findViewById(R.id.ConfirmationMessage);
         try {
