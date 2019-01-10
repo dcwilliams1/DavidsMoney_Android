@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -23,7 +24,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     ListView simpleList;
-    String[] budgetCategories = {"Big Toys","Clothes","Dakshina" ,"Entertainment", "Food","Home Maintenance","Staples"};
+    String[] budgetCategories = {"Big Toys","Clothes" ,"Entertainment", "Food","Home Maintenance","Savings", "Staples", "Tithing"};
     Calendar dateCalendar = Calendar.getInstance();
     EditText editDate;
 
@@ -52,6 +53,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent intent = getIntent();
         if (InEditMode()){
             this.PopulateData(intent);
+            Button cancelButton = findViewById(R.id.cancelButton);
+            cancelButton.setVisibility(View.VISIBLE);
+            cancelButton.setOnClickListener( new View.OnClickListener(){
+                public void onClick(View view){
+                    ShowBudgetItemList();
+                }
+            });
         }
         editDate.requestFocus();
     }
@@ -121,13 +129,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.action_settings:
                 return true;
             case R.id.data_list:
-                Intent dataListIntent = new Intent(this, DataList.class);
-                item.setIntent(dataListIntent);
-                startActivityForResult(dataListIntent, 0);
+                ShowBudgetItemList();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void ShowBudgetItemList() {
+        Intent dataListIntent = new Intent(this, DataList.class);
+        startActivityForResult(dataListIntent, 0);
     }
 
     @Override
