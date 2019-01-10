@@ -35,6 +35,10 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
     private List<BudgetLineItem> budgetItemDataset;
     private Observer<List<BudgetLineItem>> budgetLineItemObserver;
     private MoneyDatabase db;
+    public static final String MULTIPLE_DELETION_SUCCESS_CONFIRMATION = "com.openroad.davidsmoney.MULTIPLE_DELETION_SUCCESS_CONFIRMATION";
+    public static final String MULTIPLE_DELETION_FAILURE_CONFIRMATION = "com.openroad.davidsmoney.MULTIPLE_DELETION_FAILURE_CONFIRMATION";
+    public static final String SINGLE_DELETION_SUCCESS_CONFIRMATION = "com.openroad.davidsmoney.SINGLE_DELETION_SUCCESS_CONFIRMATION";
+    public static final String SINGLE_DELETION_FAILURE_CONFIRMATION = "com.openroad.davidsmoney.SINGLE_DELETION_FAILURE_CONFIRMATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        db = MoneyDatabase.getDatabase(this);
 
         dataListRecycler = (RecyclerView) findViewById(R.id.recycler_data_list);
         dataListRecycler.setHasFixedSize(true);
