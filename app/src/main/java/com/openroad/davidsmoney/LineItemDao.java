@@ -30,4 +30,7 @@ import java.util.List;
     @Delete
     public void delete(BudgetLineItem lineItem);
 
+    @Delete
+    public void deleteAll(List<BudgetLineItem> lineItems);
+
 }

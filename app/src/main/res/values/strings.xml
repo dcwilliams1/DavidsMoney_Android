@@ -11,4 +11,5 @@
     <string name="category">Category</string>
     <string name="date">Date</string>
     <string name="amount">Amount</string>
+    <string name="title_activity_clear_database">Clear Database</string>
 </resources>

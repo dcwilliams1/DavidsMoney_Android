@@ -16,11 +16,12 @@ public class SaveDataActivity extends AppCompatActivity {
 
     public static final String DATA_SAVED_CONFIRMATION = "com.openroad.davidsmoney.DATA_SAVED_CONFIRMATION";
     public static final String DATA_NOT_SAVED_CONFIRMATION = "com.openroad.davidsmoney.DATA_NOT_SAVED_CONFIRMATION";
+    private MoneyDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final MoneyDatabase db = MoneyDatabase.getDatabase(this);
+        db = MoneyDatabase.getDatabase(this);
         setContentView(R.layout.activity_save_data);
         // Get the Intent that started this activity and extract the data
         Intent intent = getIntent();
