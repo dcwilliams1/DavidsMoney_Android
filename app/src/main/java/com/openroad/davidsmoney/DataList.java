@@ -35,6 +35,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
     private List<BudgetLineItem> budgetItemDataset;
     private Observer<List<BudgetLineItem>> budgetLineItemObserver;
     private MoneyDatabase db;
+//    private View.OnClickListener budgetItemOnClickListener;
     public static final String MULTIPLE_DELETION_SUCCESS_CONFIRMATION = "com.openroad.davidsmoney.MULTIPLE_DELETION_SUCCESS_CONFIRMATION";
     public static final String MULTIPLE_DELETION_FAILURE_CONFIRMATION = "com.openroad.davidsmoney.MULTIPLE_DELETION_FAILURE_CONFIRMATION";
     public static final String SINGLE_DELETION_SUCCESS_CONFIRMATION = "com.openroad.davidsmoney.SINGLE_DELETION_SUCCESS_CONFIRMATION";
@@ -49,6 +50,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = MoneyDatabase.getDatabase(this);
 
+//        budgetItemOnClickListener = new BudgetItemOnClickListener();
         dataListRecycler = (RecyclerView) findViewById(R.id.recycler_data_list);
         dataListRecycler.setHasFixedSize(true);
 
@@ -104,7 +106,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
     public class BudgetItemAdapter extends RecyclerView.Adapter<BudgetItemAdapter.BudgetItemViewHolder> {
         private List<BudgetLineItem> budgetItemDataset;
 
-        public class BudgetItemViewHolder extends RecyclerView.ViewHolder {
+        public class BudgetItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             public TextView budgetItemDescriptionView;
             public TextView budgetItemDateView;
             public TextView budgetItemCategoryView;
@@ -116,6 +118,28 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
                 budgetItemDateView = itemView.findViewById(R.id.item_date_view);
                 budgetItemCategoryView = itemView.findViewById(R.id.item_category_view);
                 budgetItemAmountView = itemView.findViewById(R.id.item_amount_view);
+                itemView.setOnClickListener(this);
+            }
+
+            @Override
+            public void onClick(final View view) {
+                int itemPosition = dataListRecycler.getChildLayoutPosition(view);
+                BudgetLineItem item = budgetItemDataset.get(itemPosition);
+                EditBudgetLineItem(item, view);
+            }
+
+            public void EditBudgetLineItem(BudgetLineItem item, View view) {
+                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                intent.setAction("android.intent.action.ACTION_EDIT");
+                Bundle dataBundle = new Bundle();
+                dataBundle.putLong("amount", item.getAmount());
+                dataBundle.putString("description", item.getDescription());
+                dataBundle.putString("category", item.getCategory());
+                dataBundle.putLong("date", Converters.dateToTimestamp(item.getDate()));
+                dataBundle.putInt("lineItemId", item.getLineItemId());
+                intent.putExtras(dataBundle);
+
+                startActivity(intent);
             }
         }
 

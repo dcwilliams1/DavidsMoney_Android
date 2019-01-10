@@ -29,6 +29,7 @@ public class SaveDataActivity extends AppCompatActivity {
         final String description = intent.getStringExtra("description");
         final String category = intent.getStringExtra("category");
         final String dateString = intent.getStringExtra("date");
+        final Integer lineItemId = intent.getIntExtra("lineItemId", 0);
         final java.util.Date expenseDate;
         java.util.Date tempDate;
         SimpleDateFormat dateFormat = new SimpleDateFormat("M/d/yyyy", Locale.ENGLISH);
@@ -49,7 +50,13 @@ public class SaveDataActivity extends AppCompatActivity {
                 expense.setDescription(description);
                 expense.setCategory(category);
                 expense.setDate(expenseDate);
-                db.userDao().insertBudgetLineItem(expense);
+                expense.setLineItemId(lineItemId);
+
+                if (expense.getLineItemId() < 1) {
+                    db.userDao().insertBudgetLineItem(expense);
+                } else {
+                    db.userDao().updateBudgetLineItem(expense);
+                }
             }
         };
         dbThread.start();

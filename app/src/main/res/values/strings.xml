@@ -12,4 +12,7 @@
     <string name="date">Date</string>
     <string name="amount">Amount</string>
     <string name="title_activity_clear_database">Clear Database</string>
+    <string name="CANCEL_TEXT">Cancel</string>
+    <string name="SAVE_TEXT">Save</string>
+    <string name="DEFAULT_DATE_FORMAT">M/d/yyyy</string>
 </resources>
