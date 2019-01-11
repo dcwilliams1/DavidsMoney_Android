@@ -50,9 +50,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        Intent intent = getIntent();
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                saveData(view);
+            }
+        });
+
         if (InEditMode()){
-            this.PopulateData(intent);
+            this.PopulateData(getIntent());
             Button cancelButton = findViewById(R.id.cancelButton);
             cancelButton.setVisibility(View.VISIBLE);
             cancelButton.setOnClickListener( new View.OnClickListener(){
@@ -60,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     ShowBudgetItemList();
                 }
             });
+            saveButton.setText(R.string.UPDATE_TEXT);
         }
         editDate.requestFocus();
     }
@@ -89,9 +96,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         dataBundle.putString("description", editDescription.getText().toString());
         dataBundle.putString("category", editCategory.getSelectedItem().toString());
         dataBundle.putString("date", editDate.getText().toString());
-        dataBundle.putInt("lineItemId", getIntent().getIntExtra("lineItemId", 0));
+        if (InEditMode()) {
+            dataBundle.putInt("lineItemId", getIntent().getIntExtra("lineItemId", 0));
+            dataBundle.putBoolean("inEditMode", true);
+        }
         intent.putExtras(dataBundle);
-
 
         startActivity(intent);
     }
@@ -113,7 +122,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private boolean InEditMode(){
-        return getIntent().getAction().equals("android.intent.action.ACTION_EDIT");
+        boolean returnValue = false;
+        String action = getIntent().getAction();
+        if (action != null){
+            returnValue = action.equals(Intent.ACTION_EDIT);
+        }
+        return returnValue;
     }
 
     @Override
@@ -138,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void ShowBudgetItemList() {
         Intent dataListIntent = new Intent(this, DataList.class);
+        dataListIntent.setAction(Intent.ACTION_VIEW);
         startActivityForResult(dataListIntent, 0);
     }
 

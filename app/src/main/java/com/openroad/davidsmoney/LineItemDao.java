@@ -22,7 +22,7 @@ import java.util.List;
     @Query("SELECT * FROM BudgetLineItem WHERE Description LIKE :description LIMIT 1")
     BudgetLineItem findByDescription(String description);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.FAIL)
     public long insertBudgetLineItem(BudgetLineItem item);
 
     @Insert

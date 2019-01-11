@@ -50,7 +50,6 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = MoneyDatabase.getDatabase(this);
 
-//        budgetItemOnClickListener = new BudgetItemOnClickListener();
         dataListRecycler = (RecyclerView) findViewById(R.id.recycler_data_list);
         dataListRecycler.setHasFixedSize(true);
 
@@ -85,6 +84,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
                 return true;
             case R.id.enter_data:
                 Intent mainActivityIntent = new Intent(this, MainActivity.class);
+                mainActivityIntent.setAction(Intent.ACTION_MAIN);
                 item.setIntent(mainActivityIntent);
                 startActivityForResult(mainActivityIntent, 0);
                 return true;
@@ -130,13 +130,14 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
 
             public void EditBudgetLineItem(BudgetLineItem item, View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
-                intent.setAction("android.intent.action.ACTION_EDIT");
+                intent.setAction(Intent.ACTION_EDIT);
                 Bundle dataBundle = new Bundle();
                 dataBundle.putLong("amount", item.getAmount());
                 dataBundle.putString("description", item.getDescription());
                 dataBundle.putString("category", item.getCategory());
                 dataBundle.putLong("date", Converters.dateToTimestamp(item.getDate()));
                 dataBundle.putInt("lineItemId", item.getLineItemId());
+                dataBundle.putBoolean("inEditMode", true);
                 intent.putExtras(dataBundle);
 
                 startActivity(intent);
