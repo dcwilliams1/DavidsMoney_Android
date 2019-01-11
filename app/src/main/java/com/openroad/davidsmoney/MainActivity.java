@@ -1,9 +1,8 @@
 package com.openroad.davidsmoney;
 
-import android.app.Application;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,9 +22,9 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    String[] budgetCategories = {"Big Toys", "Clothes" ,"Entertainment", "Food", "Home Maintenance", "Savings", "Staples", "Tithing", "Transportation", "Vacation"};
-    Calendar dateCalendar = Calendar.getInstance();
-    EditText editDate;
+    private String[] budgetCategories;
+    private final Calendar dateCalendar = Calendar.getInstance();
+    private EditText editDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Spinner categoryDropdown = findViewById(R.id.editCategory);
         categoryDropdown.setOnItemSelectedListener(this);
-        ArrayAdapter<String> categoryArrayAdapter = new ArrayAdapter<String>(this, R.layout.category_spinner, budgetCategories);
+        Resources resources = getResources();
+        budgetCategories = resources.getStringArray(R.array.budget_categories);
+        ArrayAdapter<String> categoryArrayAdapter = new ArrayAdapter<>(this, R.layout.category_spinner, budgetCategories);
         categoryDropdown.setAdapter(categoryArrayAdapter);
 
         editDate = findViewById(R.id.editDate);
@@ -77,13 +78,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         editAmount.setText(Long.toString(intent.getLongExtra(this.getString(R.string.amount_property), 0)));
         editDescription.setText(intent.getStringExtra(this.getString(R.string.description_property)));
-        editCategory.setSelection(((ArrayAdapter)editCategory.getAdapter()).getPosition(intent.getStringExtra(this.getString(R.string.category_property))));
+        ArrayAdapter<String> categoryAdapter = (ArrayAdapter<String>)editCategory.getAdapter();
+        editCategory.setSelection(categoryAdapter.getPosition(intent.getStringExtra(this.getString(R.string.category_property))));
         java.util.Date itemDate = new java.util.Date(intent.getLongExtra(this.getString(R.string.date_property), 0));
         editDate.setText(new SimpleDateFormat(this.getString(R.string.DEFAULT_DATE_FORMAT), Locale.getDefault()).format(itemDate));
         dateCalendar.setTime(itemDate);
     }
 
-    public void saveData(View view) {
+    private void saveData(View view) {
         Intent intent = new Intent(this, SaveDataActivity.class);
         EditText editAmount = findViewById(R.id.editAmount);
         EditText editDescription =  findViewById(R.id.editDescription);
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intent);
     }
 
-    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+    private DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
             dateCalendar.set(Calendar.YEAR, year);

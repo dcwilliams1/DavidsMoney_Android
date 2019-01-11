@@ -1,17 +1,12 @@
 package com.openroad.davidsmoney;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-
-import static android.provider.LiveFolders.INTENT;
-import static com.openroad.davidsmoney.R.id.ConfirmationMessage;
 
 public class SaveDataActivity extends AppCompatActivity {
 
@@ -46,8 +41,8 @@ public class SaveDataActivity extends AppCompatActivity {
             tempDate = new java.util.Date();
         }
         expenseDate = tempDate;
-        String successMessage = "Saved $" + amount + "\n" + "to " + category + "\n" + "for " + description + "\n" + "on " + dateFormat.format(expenseDate);
-        String failureMessage = this.getString(R.string.budget_item_save_failure_messge);
+        String successMessage = this.getString(R.string.expense_saving_success_messge, amount, category, description, dateFormat.format(expenseDate));
+        String failureMessage = this.getString(R.string.expense_saving_failure_messge);
 
         Thread dbThread = new Thread() {
             @Override
@@ -78,7 +73,7 @@ public class SaveDataActivity extends AppCompatActivity {
             }
             startActivityForResult(finishedSavingIntent, 0);
         } catch (Exception ex){
-            textView.setText(failureMessage + ex.getMessage());
+            textView.setText(this.getString(R.string.friendly_error_with_detail, failureMessage,  ex.getMessage()));
         }
     }
 }

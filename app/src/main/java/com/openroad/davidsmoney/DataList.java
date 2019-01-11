@@ -2,7 +2,6 @@ package com.openroad.davidsmoney;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,11 +21,11 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class DataList extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
     private RecyclerView dataListRecycler;
     private RecyclerView.Adapter dataListAdapter;
-    private RecyclerView.LayoutManager dataListLayoutMgr;
     private List<BudgetLineItem> budgetItemDataset;
     private Observer<List<BudgetLineItem>> budgetLineItemObserver;
     private MoneyDatabase db;
@@ -38,8 +37,9 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         setContentView(R.layout.activity_list_data);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         db = MoneyDatabase.getDatabase(this);
+        RecyclerView.LayoutManager dataListLayoutMgr;
 
         dataListRecycler = findViewById(R.id.recycler_data_list);
         dataListRecycler.setHasFixedSize(true);
@@ -94,16 +94,16 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
     }
 
     public class BudgetItemAdapter extends RecyclerView.Adapter<BudgetItemAdapter.BudgetItemViewHolder> {
-        private List<BudgetLineItem> budgetItemDataset;
+        private final List<BudgetLineItem> budgetItemDataset;
         private  Context appContext;
 
         public class BudgetItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-            public TextView budgetItemDescriptionView;
-            public TextView budgetItemDateView;
-            public TextView budgetItemCategoryView;
-            public TextView budgetItemAmountView;
+            final TextView budgetItemDescriptionView;
+            TextView budgetItemDateView;
+            TextView budgetItemCategoryView;
+            TextView budgetItemAmountView;
 
-            public BudgetItemViewHolder(View itemView) {
+            BudgetItemViewHolder(View itemView) {
                 super(itemView);
                 budgetItemDescriptionView = itemView.findViewById(R.id.item_description_view);
                 budgetItemDateView = itemView.findViewById(R.id.item_date_view);
@@ -120,7 +120,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
                 EditBudgetLineItem(item, view);
             }
 
-            public void EditBudgetLineItem(BudgetLineItem item, View view) {
+            void EditBudgetLineItem(BudgetLineItem item, View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 intent.setAction(Intent.ACTION_EDIT);
                 Bundle dataBundle = new Bundle();
@@ -136,11 +136,12 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
             }
         }
 
-        public BudgetItemAdapter(List<BudgetLineItem> BudgetItemDataSet) {
+        BudgetItemAdapter(List<BudgetLineItem> BudgetItemDataSet) {
             budgetItemDataset = BudgetItemDataSet;
         }
 
 
+        @NonNull
         public BudgetItemAdapter.BudgetItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View budgetItemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_list_layout, parent, false);
@@ -152,7 +153,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         @Override
         public void onBindViewHolder(@NonNull BudgetItemViewHolder viewHolder, int position) {
             TextView amountView = viewHolder.budgetItemAmountView;
-            amountView.setText("$" + budgetItemDataset.get(position).getAmount().toString());
+            amountView.setText(appContext.getString(R.string.dollar_currency_amount, budgetItemDataset.get(position).getAmount().toString()));
             TextView descriptionView = viewHolder.budgetItemDescriptionView;
             descriptionView.setText(budgetItemDataset.get(position).getDescription());
             TextView dateView = viewHolder.budgetItemDateView;
@@ -177,8 +178,8 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         results.observe(this, budgetLineItemObserver);
     }
 
-    private boolean clearDatabase(){
-        return deleteItems(budgetItemDataset);
+    private void clearDatabase(){
+        deleteItems(budgetItemDataset);
     }
 
     private boolean deleteItems(List<BudgetLineItem> itemsToDelete){
@@ -198,7 +199,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
 //            textView.setText(getDeletionSuccessMessage(multipleItemsDeleted));
             success = true;
         } catch (Exception ex){
-//            textView.setText(getDeletionFalureMessage(multipleItemsDeleted) + ex.getMessage());
+//            textView.setText(getDeletionFailureMessage(multipleItemsDeleted) + ex.getMessage());
         }
         return success;
     }
@@ -213,7 +214,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         return successMessage.toString();
     }
 
-    private String getDeletionFalureMessage(boolean multipleDeletions){
+    private String getDeletionFailureMessage(boolean multipleDeletions){
         StringBuilder failureMessage = new StringBuilder();
         if (multipleDeletions) {
             failureMessage.append(this.getString(R.string.multiple_expense_deletion_failure_message));

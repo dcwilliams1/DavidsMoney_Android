@@ -23,18 +23,18 @@ import java.util.List;
     BudgetLineItem findByDescription(String description);
 
     @Insert(onConflict = OnConflictStrategy.FAIL)
-    public long insertBudgetLineItem(BudgetLineItem item);
+    long insertBudgetLineItem(BudgetLineItem item);
 
     @Insert
-    public void insertAll(List<BudgetLineItem> lineItems);
+    void insertAll(List<BudgetLineItem> lineItems);
 
     @Update
-    public void updateBudgetLineItem(BudgetLineItem item);
+    void updateBudgetLineItem(BudgetLineItem item);
 
     @Delete
-    public void delete(BudgetLineItem lineItem);
+    void delete(BudgetLineItem lineItem);
 
     @Delete
-    public void deleteAll(List<BudgetLineItem> lineItems);
+    void deleteAll(List<BudgetLineItem> lineItems);
 
 }
