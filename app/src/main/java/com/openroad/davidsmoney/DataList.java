@@ -37,7 +37,6 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         setContentView(R.layout.activity_list_data);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         db = MoneyDatabase.getDatabase(this);
         RecyclerView.LayoutManager dataListLayoutMgr;
 
@@ -192,16 +191,22 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
             }
         };
         dbThread.start();
-//        TextView textView = findViewById(R.id.ConfirmationMessage);
         boolean multipleItemsDeleted = itemsToDelete.size() > 1;
+        String returnMessage = getDeletionSuccessMessage(multipleItemsDeleted);
         try {
             dbThread.join();
-//            textView.setText(getDeletionSuccessMessage(multipleItemsDeleted));
             success = true;
         } catch (Exception ex){
-//            textView.setText(getDeletionFailureMessage(multipleItemsDeleted) + ex.getMessage());
+            returnMessage = getString(R.string.friendly_error_with_detail, getDeletionFailureMessage(multipleItemsDeleted), ex.getMessage());
         }
+        ShowMessage(returnMessage);
         return success;
+    }
+
+    private void ShowMessage(String message){
+        Context context = getApplicationContext();
+        View view = findViewById(R.id.list_display_view);
+        Popup.ShowMessageWindow(context, view, message);
     }
 
     private String getDeletionSuccessMessage(boolean multipleDeletions){

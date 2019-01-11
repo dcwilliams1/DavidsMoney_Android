@@ -71,6 +71,11 @@ public class SaveDataActivity extends AppCompatActivity {
                 finishedSavingIntent.setClass(this, DataList.class);
                 finishedSavingIntent.setAction(Intent.ACTION_VIEW);
             }
+
+            Bundle dataBundle = new Bundle();
+            dataBundle.putString(this.getString(R.string.message_key), successMessage);
+            finishedSavingIntent.putExtras(dataBundle);
+
             startActivityForResult(finishedSavingIntent, 0);
         } catch (Exception ex){
             textView.setText(this.getString(R.string.friendly_error_with_detail, failureMessage,  ex.getMessage()));

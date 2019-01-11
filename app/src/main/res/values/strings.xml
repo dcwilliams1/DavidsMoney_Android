@@ -16,6 +16,7 @@
     <string name="category_property">category</string>
     <string name="date_property">date</string>
     <string name="amount_property">amount</string>
+    <string name="message_key">message</string>
     <string name="title_activity_clear_database">Clear Database</string>
     <string name="DEFAULT_DATE_FORMAT">M/d/yyyy</string>
     <string name="in_edit_mode">inEditMode</string>

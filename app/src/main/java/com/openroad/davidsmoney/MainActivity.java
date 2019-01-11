@@ -6,6 +6,9 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +17,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -68,6 +74,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             saveButton.setText(R.string.update_button_label);
         }
         editDate.requestFocus();
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        final String message = GetMessageFromWorkflow();
+        if (message != null){
+            findViewById(R.id.include).post(new Runnable() {
+                public void run() {
+                    View pageView = findViewById(R.id.include);
+                    Popup.ShowMessageWindow(getApplicationContext(), pageView, message);
+                }
+            });
+        }
     }
 
     private void PopulateData(Intent intent) {
@@ -130,6 +150,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return returnValue;
     }
 
+    private String GetMessageFromWorkflow(){
+        String returnValue = null;
+        String message = getIntent().getStringExtra(this.getString(R.string.message_key));
+        if (message != null){
+            returnValue = message;
+        }
+        return  returnValue;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -155,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         dataListIntent.setAction(Intent.ACTION_VIEW);
         startActivityForResult(dataListIntent, 0);
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
