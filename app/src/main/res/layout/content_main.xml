@@ -14,25 +14,26 @@
         android:id="@+id/editDate"
         android:layout_width="181dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:ems="10"
-        android:inputType="date"
-        android:focusable="true"
+        android:layout_marginLeft="16dp"
         android:clickable="true"
+        android:ems="10"
+        android:focusable="true"
+        android:inputType="date"
         android:nextFocusDown="@+id/editAmount"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblDate"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/lblDate" />
 
     <TextView
         android:id="@+id/lblDate"
         android:layout_width="75dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:text="Date"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,14 +41,15 @@
         android:id="@+id/editDescription"
         android:layout_width="253dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:nextFocusDown="@+id/editCategory"
         android:textColor="@android:color/black"
+        android:textSize="24sp"
         android:typeface="normal"
         android:visibility="visible"
-        android:nextFocusDown="@+id/editCategory"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblDescriptionLabel" />
 
@@ -55,24 +57,25 @@
         android:id="@+id/editAmount"
         android:layout_width="140dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:ems="10"
         android:inputType="number"
+        android:nextFocusDown="@+id/editDescription"
         android:textColor="@android:color/black"
+        android:textSize="24sp"
         android:typeface="normal"
         android:visibility="visible"
-        android:nextFocusDown="@+id/editDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblAmountLabel" />
 
     <Spinner
         android:id="@+id/editCategory"
-        android:layout_width="170dp"
-        android:layout_height="29dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,12 +86,13 @@
 
     <TextView
         android:id="@+id/lblAmountLabel"
-        android:layout_width="50dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/edit_amount"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDate" />
 
@@ -96,10 +100,11 @@
         android:id="@+id/lblDescriptionLabel"
         android:layout_width="91dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/edit_description"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editAmount" />
 
@@ -111,6 +116,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/edit_category"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDescription" />
 

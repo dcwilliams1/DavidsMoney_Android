@@ -38,8 +38,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Spinner categoryDropdown = (Spinner) findViewById(R.id.editCategory);
         categoryDropdown.setOnItemSelectedListener(this);
-        ArrayAdapter<String> categoryArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, budgetCategories);
-        categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> categoryArrayAdapter = new ArrayAdapter<String>(this, R.layout.category_spinner, budgetCategories);
         categoryDropdown.setAdapter(categoryArrayAdapter);
 
         editDate = (EditText) findViewById(R.id.editDate);

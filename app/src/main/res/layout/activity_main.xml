@@ -25,11 +25,14 @@
     <include
         android:id="@+id/include"
         layout="@layout/content_main"
-        android:layout_width="269dp"
-        android:layout_height="310dp"
+        android:layout_width="358dp"
+        android:layout_height="376dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:layout_constraintVertical_chainStyle="spread_inside" />
