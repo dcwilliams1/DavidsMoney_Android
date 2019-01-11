@@ -15,8 +15,6 @@ import static com.openroad.davidsmoney.R.id.ConfirmationMessage;
 
 public class SaveDataActivity extends AppCompatActivity {
 
-    public static final String DATA_SAVED_CONFIRMATION = "com.openroad.davidsmoney.DATA_SAVED_CONFIRMATION";
-    public static final String DATA_NOT_SAVED_CONFIRMATION = "com.openroad.davidsmoney.DATA_NOT_SAVED_CONFIRMATION";
     private MoneyDatabase db;
     private boolean InEditMode = false;
 
@@ -32,24 +30,24 @@ public class SaveDataActivity extends AppCompatActivity {
     private void SaveBudgetLineItem() {
         // Get the Intent that started this activity and extract the data
         Intent intent = getIntent();
-        InEditMode = intent.getBooleanExtra("inEditMode", false);
-        final String amount = intent.getStringExtra("amount");
-        final String description = intent.getStringExtra("description");
-        final String category = intent.getStringExtra("category");
-        final String dateString = intent.getStringExtra("date");
-        final Integer lineItemId = intent.getIntExtra("lineItemId", 0);
+        InEditMode = intent.getBooleanExtra(this.getString(R.string.in_edit_mode), false);
+        final String amount = intent.getStringExtra(this.getString(R.string.amount_property));
+        final String description = intent.getStringExtra(this.getString(R.string.description_property));
+        final String category = intent.getStringExtra(this.getString(R.string.category_property));
+        final String dateString = intent.getStringExtra(this.getString(R.string.date_property));
+        final Integer lineItemId = intent.getIntExtra(this.getString(R.string.line_item_id_property), 0);
 
         final java.util.Date expenseDate;
         java.util.Date tempDate;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("M/d/yyyy", Locale.ENGLISH);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(this.getString(R.string.DEFAULT_DATE_FORMAT), Locale.ENGLISH);
         try {
             tempDate = dateFormat.parse(dateString);
         } catch (java.text.ParseException parsingError){
             tempDate = new java.util.Date();
         }
         expenseDate = tempDate;
-        String successMessage = new StringBuilder().append("Saved $").append(amount).append("\n").append("to " + category).append("\n").append("for " + description).append("\n").append("on ").append(dateFormat.format(expenseDate)).toString();
-        String failureMessage = new StringBuilder().append("Unable to save this expense to the database.").toString();
+        String successMessage = "Saved $" + amount + "\n" + "to " + category + "\n" + "for " + description + "\n" + "on " + dateFormat.format(expenseDate);
+        String failureMessage = this.getString(R.string.budget_item_save_failure_messge);
 
         Thread dbThread = new Thread() {
             @Override

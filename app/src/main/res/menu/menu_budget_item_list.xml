@@ -9,5 +9,5 @@
     <item
         android:id="@+id/clear_database"
         android:orderInCategory="105"
-        android:title="Clear Database" />
+        android:title="Clear Expense List" />
 </menu>

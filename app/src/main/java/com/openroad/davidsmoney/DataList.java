@@ -3,6 +3,7 @@ package com.openroad.davidsmoney;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,14 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Locale;
 
 public class DataList extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
@@ -35,22 +30,18 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
     private List<BudgetLineItem> budgetItemDataset;
     private Observer<List<BudgetLineItem>> budgetLineItemObserver;
     private MoneyDatabase db;
-//    private View.OnClickListener budgetItemOnClickListener;
-    public static final String MULTIPLE_DELETION_SUCCESS_CONFIRMATION = "com.openroad.davidsmoney.MULTIPLE_DELETION_SUCCESS_CONFIRMATION";
-    public static final String MULTIPLE_DELETION_FAILURE_CONFIRMATION = "com.openroad.davidsmoney.MULTIPLE_DELETION_FAILURE_CONFIRMATION";
-    public static final String SINGLE_DELETION_SUCCESS_CONFIRMATION = "com.openroad.davidsmoney.SINGLE_DELETION_SUCCESS_CONFIRMATION";
-    public static final String SINGLE_DELETION_FAILURE_CONFIRMATION = "com.openroad.davidsmoney.SINGLE_DELETION_FAILURE_CONFIRMATION";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_data);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = MoneyDatabase.getDatabase(this);
 
-        dataListRecycler = (RecyclerView) findViewById(R.id.recycler_data_list);
+        dataListRecycler = findViewById(R.id.recycler_data_list);
         dataListRecycler.setHasFixedSize(true);
 
         dataListLayoutMgr = new LinearLayoutManager(this);
@@ -71,7 +62,6 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_budget_item_list, menu);
         return true;
     }
@@ -105,6 +95,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
 
     public class BudgetItemAdapter extends RecyclerView.Adapter<BudgetItemAdapter.BudgetItemViewHolder> {
         private List<BudgetLineItem> budgetItemDataset;
+        private  Context appContext;
 
         public class BudgetItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             public TextView budgetItemDescriptionView;
@@ -119,6 +110,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
                 budgetItemCategoryView = itemView.findViewById(R.id.item_category_view);
                 budgetItemAmountView = itemView.findViewById(R.id.item_amount_view);
                 itemView.setOnClickListener(this);
+                appContext = getApplicationContext();
             }
 
             @Override
@@ -132,12 +124,12 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 intent.setAction(Intent.ACTION_EDIT);
                 Bundle dataBundle = new Bundle();
-                dataBundle.putLong("amount", item.getAmount());
-                dataBundle.putString("description", item.getDescription());
-                dataBundle.putString("category", item.getCategory());
-                dataBundle.putLong("date", Converters.dateToTimestamp(item.getDate()));
-                dataBundle.putInt("lineItemId", item.getLineItemId());
-                dataBundle.putBoolean("inEditMode", true);
+                dataBundle.putLong(appContext.getString(R.string.amount_property), item.getAmount());
+                dataBundle.putString(appContext.getString(R.string.description_property), item.getDescription());
+                dataBundle.putString(appContext.getString(R.string.category_property), item.getCategory());
+                dataBundle.putLong(appContext.getString(R.string.date_property), Converters.dateToTimestamp(item.getDate()));
+                dataBundle.putInt(appContext.getString(R.string.line_item_id_property), item.getLineItemId());
+                dataBundle.putBoolean(appContext.getString(R.string.in_edit_mode), true);
                 intent.putExtras(dataBundle);
 
                 startActivity(intent);
@@ -165,7 +157,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
             descriptionView.setText(budgetItemDataset.get(position).getDescription());
             TextView dateView = viewHolder.budgetItemDateView;
             java.util.Date complexDate = budgetItemDataset.get(position).getDate();
-            dateView.setText(new SimpleDateFormat("M/d/yyyy", Locale.getDefault()).format(complexDate));
+            dateView.setText(new SimpleDateFormat(appContext.getString(R.string.DEFAULT_DATE_FORMAT), Locale.getDefault()).format(complexDate));
             TextView categoryView = viewHolder.budgetItemCategoryView;
             categoryView.setText(budgetItemDataset.get(position).getCategory());
         }
@@ -214,21 +206,21 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
     private String getDeletionSuccessMessage(boolean multipleDeletions){
         StringBuilder successMessage = new StringBuilder();
         if (multipleDeletions) {
-            successMessage.append("The expenses were successfully deleted");
+            successMessage.append(this.getString(R.string.multiple_expense_deletion_success_message));
         } else {
-            successMessage.append("The expense was successfully deleted");
+            successMessage.append(this.getString(R.string.single_expense_deletion_success_message));
         }
         return successMessage.toString();
     }
 
     private String getDeletionFalureMessage(boolean multipleDeletions){
-        StringBuilder successMessage = new StringBuilder();
+        StringBuilder failureMessage = new StringBuilder();
         if (multipleDeletions) {
-            successMessage.append("The expenses could not be deleted");
+            failureMessage.append(this.getString(R.string.multiple_expense_deletion_failure_message));
         } else {
-            successMessage.append("The expense could not be deleted");
+            failureMessage.append(this.getString(R.string.single_expense_deletion_failure_message));
         }
-        return successMessage.toString();
+        return failureMessage.toString();
     }
 }
 

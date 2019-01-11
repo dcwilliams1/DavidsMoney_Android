@@ -1,6 +1,8 @@
 package com.openroad.davidsmoney;
 
+import android.app.Application;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,18 +15,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    ListView simpleList;
-    String[] budgetCategories = {"Big Toys","Clothes" ,"Entertainment", "Food","Home Maintenance","Savings", "Staples", "Tithing"};
+    String[] budgetCategories = {"Big Toys", "Clothes" ,"Entertainment", "Food", "Home Maintenance", "Savings", "Staples", "Tithing", "Transportation", "Vacation"};
     Calendar dateCalendar = Calendar.getInstance();
     EditText editDate;
 
@@ -32,16 +31,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
-        Spinner categoryDropdown = (Spinner) findViewById(R.id.editCategory);
+        Spinner categoryDropdown = findViewById(R.id.editCategory);
         categoryDropdown.setOnItemSelectedListener(this);
         ArrayAdapter<String> categoryArrayAdapter = new ArrayAdapter<String>(this, R.layout.category_spinner, budgetCategories);
         categoryDropdown.setAdapter(categoryArrayAdapter);
 
-        editDate = (EditText) findViewById(R.id.editDate);
+        editDate = findViewById(R.id.editDate);
         editDate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -65,39 +64,39 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     ShowBudgetItemList();
                 }
             });
-            saveButton.setText(R.string.UPDATE_TEXT);
+            saveButton.setText(R.string.update_button_label);
         }
         editDate.requestFocus();
     }
 
     private void PopulateData(Intent intent) {
-        EditText editAmount = (EditText) findViewById(R.id.editAmount);
-        EditText editDescription = (EditText) findViewById(R.id.editDescription);
-        Spinner editCategory = (Spinner) findViewById(R.id.editCategory);
-        EditText editDate = (EditText) findViewById(R.id.editDate);
+        EditText editAmount = findViewById(R.id.editAmount);
+        EditText editDescription = findViewById(R.id.editDescription);
+        Spinner editCategory = findViewById(R.id.editCategory);
+        EditText editDate = findViewById(R.id.editDate);
 
-        editAmount.setText(Long.toString(intent.getLongExtra("amount", 0)));
-        editDescription.setText(intent.getStringExtra("description"));
-        editCategory.setSelection(((ArrayAdapter)editCategory.getAdapter()).getPosition(intent.getStringExtra("category")));
-        java.util.Date itemDate = new java.util.Date(intent.getLongExtra("date", 0));
-        editDate.setText(new SimpleDateFormat("M/d/yyyy", Locale.getDefault()).format(itemDate));
+        editAmount.setText(Long.toString(intent.getLongExtra(this.getString(R.string.amount_property), 0)));
+        editDescription.setText(intent.getStringExtra(this.getString(R.string.description_property)));
+        editCategory.setSelection(((ArrayAdapter)editCategory.getAdapter()).getPosition(intent.getStringExtra(this.getString(R.string.category_property))));
+        java.util.Date itemDate = new java.util.Date(intent.getLongExtra(this.getString(R.string.date_property), 0));
+        editDate.setText(new SimpleDateFormat(this.getString(R.string.DEFAULT_DATE_FORMAT), Locale.getDefault()).format(itemDate));
         dateCalendar.setTime(itemDate);
     }
 
     public void saveData(View view) {
         Intent intent = new Intent(this, SaveDataActivity.class);
-        EditText editAmount = (EditText) findViewById(R.id.editAmount);
-        EditText editDescription = (EditText) findViewById(R.id.editDescription);
-        Spinner editCategory = (Spinner) findViewById(R.id.editCategory);
-        EditText editDate = (EditText) findViewById(R.id.editDate);
+        EditText editAmount = findViewById(R.id.editAmount);
+        EditText editDescription =  findViewById(R.id.editDescription);
+        Spinner editCategory = findViewById(R.id.editCategory);
+        EditText editDate =  findViewById(R.id.editDate);
         Bundle dataBundle = new Bundle();
-        dataBundle.putString("amount", editAmount.getText().toString());
-        dataBundle.putString("description", editDescription.getText().toString());
-        dataBundle.putString("category", editCategory.getSelectedItem().toString());
-        dataBundle.putString("date", editDate.getText().toString());
+        dataBundle.putString(this.getString(R.string.amount_property), editAmount.getText().toString());
+        dataBundle.putString(this.getString(R.string.description_property), editDescription.getText().toString());
+        dataBundle.putString(this.getString(R.string.category_property), editCategory.getSelectedItem().toString());
+        dataBundle.putString(this.getString(R.string.date_property), editDate.getText().toString());
         if (InEditMode()) {
-            dataBundle.putInt("lineItemId", getIntent().getIntExtra("lineItemId", 0));
-            dataBundle.putBoolean("inEditMode", true);
+            dataBundle.putInt(this.getString(R.string.line_item_id_property), getIntent().getIntExtra(this.getString(R.string.line_item_id_property), 0));
+            dataBundle.putBoolean(this.getString(R.string.in_edit_mode), true);
         }
         intent.putExtras(dataBundle);
 
@@ -115,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     };
 
     private void updateLabel(){
-        String budgetDateFormat = "M/d/yyyy";
+        String budgetDateFormat = this.getString(R.string.DEFAULT_DATE_FORMAT);
         SimpleDateFormat sdf = new SimpleDateFormat(budgetDateFormat, Locale.US);
         editDate.setText(sdf.format(dateCalendar.getTime()));
     }
