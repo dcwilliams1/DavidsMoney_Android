@@ -8,7 +8,7 @@
     <string name="description_label">Description</string>
     <string name="category_label">Category</string>
     <string name="date_label">Date</string>
-    <string name="title_activity_list_data">View Budget Data</string>
+    <string name="title_activity_list_data">View Expenses</string>
     <string name="no_text"></string>
     <string name="dollar_currency_amount">$ %1$s</string>
     <string name="friendly_error_with_detail">%1$s %2$s</string>
@@ -17,19 +17,19 @@
     <string name="date_property">date</string>
     <string name="amount_property">amount</string>
     <string name="message_key">message</string>
-    <string name="title_activity_clear_database">Clear Database</string>
     <string name="DEFAULT_DATE_FORMAT">M/d/yyyy</string>
     <string name="in_edit_mode">inEditMode</string>
     <string name="enter_data_menu">Enter Data</string>
     <string name="clear_database_menu">Clear Expense List</string>
-    <string name="view_budget_items_menu">View Budget Items</string>
+    <string name="view_budget_items_menu">View Expenses</string>
     <string name="line_item_id_property">lineItemId</string>
-    <string name="expense_saving_success_messge">Saved $ %1$s \n to %2$s \n for %3$s \n on %4$s</string>
+    <string name="expense_saving_success_messge">Saved $ %1$s \nto %2$s \nfor %3$s \non %4$s</string>
     <string name="expense_saving_failure_messge">Unable to save this expense.</string>
     <string name="multiple_expense_deletion_success_message">The expenses were successfully removed from the list.</string>
     <string name="single_expense_deletion_success_message">The expense was successfully removed from the list.</string>
     <string name="multiple_expense_deletion_failure_message">The expenses could not be removed from the list.</string>
     <string name="single_expense_deletion_failure_message">The expense could not be removed from the list.</string>
+    <string name="required_field_error_message">Please provide information.</string>
     <string-array name="budget_categories">
         <item>Big Toys</item>
         <item>Clothes</item>

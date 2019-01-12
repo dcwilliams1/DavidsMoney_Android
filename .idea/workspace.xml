@@ -14,7 +14,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/MainActivity.java" line="140" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/MainActivity.java" line="153" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -23,8 +23,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1e38b30-f72b-4e9a-967c-ebd54c90942f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/Popup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/message_popup.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -36,8 +34,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/DataList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/DataList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/SaveDataActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/SaveDataActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_list_data.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_list_data.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/Popup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/Popup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -93,11 +90,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DataList.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataList.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/DataList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="202" column="33" selection-start-line="202" selection-start-column="33" selection-end-line="202" selection-end-column="33" />
+            <state relative-caret-position="187">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="e#4966#5012#0" expanded="true" />
                 <element signature="e#5070#5121#0" expanded="true" />
@@ -168,8 +165,17 @@
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+            <state relative-caret-position="527">
+              <caret line="31" column="75" selection-start-line="31" selection-start-column="75" selection-end-line="31" selection-end-column="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="R.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/processDebugResources/r/com/openroad/davidsmoney/R.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7202">
+              <caret line="5078" column="28" selection-start-line="5078" selection-start-column="28" selection-end-line="5078" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -189,65 +195,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SaveDataActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/SaveDataActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="604">
-              <caret line="78" selection-start-line="78" selection-end-line="78" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1802#1919#0" expanded="true" />
-                <element signature="e#1953#2007#0" expanded="true" />
-                <element signature="e#3199#3235#0" expanded="true" />
-                <element signature="e#3397#3482#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="161" column="13" lean-forward="true" selection-start-line="161" selection-start-column="13" selection-end-line="161" selection-end-column="13" />
+            <state relative-caret-position="481">
+              <caret line="73" column="9" lean-forward="true" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1870#2165#0" expanded="true" />
-                <element signature="e#2164#2165#0" expanded="true" />
-                <element signature="e#2266#2393#0" expanded="true" />
-                <element signature="e#2392#2393#0" expanded="true" />
-                <element signature="e#2634#2783#0" expanded="true" />
-                <element signature="e#2782#2783#0" expanded="true" />
-                <element signature="e#2817#2845#0" expanded="true" />
-                <element signature="e#3098#3304#0" expanded="true" />
-                <element signature="e#3303#3304#0" expanded="true" />
-                <element signature="e#3686#3726#0" expanded="true" />
-                <element signature="e#3788#3833#0" expanded="true" />
-                <element signature="e#4017#4059#0" expanded="true" />
-                <element signature="e#4137#4175#0" expanded="true" />
-                <element signature="e#4228#4272#0" expanded="true" />
-                <element signature="e#4792#4832#0" expanded="true" />
-                <element signature="e#4897#4942#0" expanded="true" />
-                <element signature="e#5012#5054#0" expanded="true" />
-                <element signature="e#5129#5167#0" expanded="true" />
-                <element signature="e#5259#5305#0" expanded="true" />
-                <element signature="e#5331#5377#0" expanded="true" />
-                <element signature="e#5418#5455#0" expanded="true" />
-                <element signature="e#5605#5955#0" expanded="true" />
-                <element signature="e#5954#5955#0" expanded="true" />
-                <element signature="e#6024#6068#0" expanded="true" />
-                <element signature="e#6608#6644#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Popup.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Popup.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/Popup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+            <state relative-caret-position="272">
+              <caret line="16" column="74" selection-start-line="16" selection-start-column="74" selection-end-line="16" selection-end-column="74" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#1032#1240#0" expanded="true" />
                 <element signature="e#1239#1240#0" expanded="true" />
               </folding>
@@ -274,6 +240,7 @@
       <find>DATA_SAVED_CONFIRMATION</find>
       <find>setOnClickListener</find>
       <find>getResources</find>
+      <find>title_activity_clear_database</find>
     </findStrings>
     <dirStrings>
       <dir>C:\projects\Money</dir>
@@ -2578,13 +2545,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_budget_item_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/SaveDataActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/message_popup.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/Popup.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_list_data.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/DataList.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/Popup.java" />
       </list>
     </option>
   </component>
@@ -2872,15 +2839,15 @@
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="13" sideWeight="0.49841017" weight="0.3291039" />
       <window_info id="Build Variants" order="3" sideWeight="0.50472814" side_tool="true" weight="0.13314785" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5190779" side_tool="true" visible="true" weight="0.24107851" />
-      <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.4809221" visible="true" weight="0.24107851" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50158983" side_tool="true" visible="true" weight="0.3298969" />
+      <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.4801272" weight="0.24107851" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="2" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.45747218" weight="0.259318" />
-      <window_info anchor="bottom" id="Inspection Results" sideWeight="0.49880764" weight="0.3298969" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.45707473" weight="0.259318" />
+      <window_info active="true" anchor="bottom" id="Inspection Results" sideWeight="0.49841017" visible="true" weight="0.3298969" />
       <window_info id="Structure" order="1" sideWeight="0.49593496" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" visible="true" weight="0.27782193" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.47933227" weight="0.3187946" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.47853735" weight="0.3187946" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49920508" weight="0.3298969" />
       <window_info anchor="right" id="Palette&#9;" order="10" />
       <window_info id="Image Layers" order="7" />
@@ -2888,9 +2855,9 @@
       <window_info anchor="right" id="Preview" order="4" weight="0.3298887" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49483308" weight="0.3298969" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49761525" weight="0.22045995" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4964229" weight="0.2926249" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49562797" weight="0.21570182" />
       <window_info id="Captures" order="4" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49527186" visible="true" weight="0.13314785" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49527186" visible="true" weight="0.13314785" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49880764" weight="0.3298969" />
       <window_info anchor="right" id="Gradle" order="6" weight="0.3298887" />
       <window_info anchor="right" id="Theme Preview" order="7" />
@@ -2914,15 +2881,10 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="77" />
+      <option name="time" value="82" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-28/android.jar!/android/view/Window.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2431">
@@ -3078,6 +3040,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
           <caret line="1955" selection-start-line="1955" selection-end-line="1955" />
+          <folding>
+            <element signature="e#57633#57634#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3205,13 +3170,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/SaveDataActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="604">
@@ -3259,52 +3217,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/Popup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-          <folding>
-            <element signature="e#1032#1240#0" expanded="true" />
-            <element signature="e#1239#1240#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="161" column="13" lean-forward="true" selection-start-line="161" selection-start-column="13" selection-end-line="161" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1870#2165#0" expanded="true" />
-            <element signature="e#2164#2165#0" expanded="true" />
-            <element signature="e#2266#2393#0" expanded="true" />
-            <element signature="e#2392#2393#0" expanded="true" />
-            <element signature="e#2634#2783#0" expanded="true" />
-            <element signature="e#2782#2783#0" expanded="true" />
-            <element signature="e#2817#2845#0" expanded="true" />
-            <element signature="e#3098#3304#0" expanded="true" />
-            <element signature="e#3303#3304#0" expanded="true" />
-            <element signature="e#3686#3726#0" expanded="true" />
-            <element signature="e#3788#3833#0" expanded="true" />
-            <element signature="e#4017#4059#0" expanded="true" />
-            <element signature="e#4137#4175#0" expanded="true" />
-            <element signature="e#4228#4272#0" expanded="true" />
-            <element signature="e#4792#4832#0" expanded="true" />
-            <element signature="e#4897#4942#0" expanded="true" />
-            <element signature="e#5012#5054#0" expanded="true" />
-            <element signature="e#5129#5167#0" expanded="true" />
-            <element signature="e#5259#5305#0" expanded="true" />
-            <element signature="e#5331#5377#0" expanded="true" />
-            <element signature="e#5418#5455#0" expanded="true" />
-            <element signature="e#5605#5955#0" expanded="true" />
-            <element signature="e#5954#5955#0" expanded="true" />
-            <element signature="e#6024#6068#0" expanded="true" />
-            <element signature="e#6608#6644#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_activity_list_data.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -3327,8 +3239,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/DataList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="202" column="33" selection-start-line="202" selection-start-column="33" selection-end-line="202" selection-end-column="33" />
+        <state relative-caret-position="187">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
           <folding>
             <element signature="e#4966#5012#0" expanded="true" />
             <element signature="e#5070#5121#0" expanded="true" />
@@ -3343,6 +3255,42 @@
             <element signature="e#8753#8817#0" expanded="true" />
             <element signature="e#9078#9144#0" expanded="true" />
             <element signature="e#9198#9262#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/processDebugResources/r/com/openroad/davidsmoney/R.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7202">
+          <caret line="5078" column="28" selection-start-line="5078" selection-start-column="28" selection-end-line="5078" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="75" selection-start-line="31" selection-start-column="75" selection-end-line="31" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="73" column="9" lean-forward="true" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/openroad/davidsmoney/Popup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="74" selection-start-line="16" selection-start-column="74" selection-end-line="16" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1032#1240#0" expanded="true" />
+            <element signature="e#1239#1240#0" expanded="true" />
           </folding>
         </state>
       </provider>

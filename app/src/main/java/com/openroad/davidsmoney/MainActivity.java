@@ -6,9 +6,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,20 +14,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private String[] budgetCategories;
     private final Calendar dateCalendar = Calendar.getInstance();
     private EditText editDate;
+    private View pageView;
+    private List<View> pageViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        pageView = findViewById(R.id.include);
+        pageViews = pageView.getFocusables(View.FOCUS_FORWARD);
 
         Spinner categoryDropdown = findViewById(R.id.editCategory);
         categoryDropdown.setOnItemSelectedListener(this);
@@ -58,9 +57,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                saveData(view);
+                SaveData();
             }
         });
+
+        for(View pageView : pageViews){
+            if (pageView instanceof EditText) {
+                ((EditText) pageView).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    public void onFocusChange(View textView, boolean hasFocus) {
+                        if (!hasFocus && TextIsValid((EditText)textView)) {
+                            ((TextView) textView).setError(null);
+                        }
+                    }
+                });
+            }
+        }
 
         if (InEditMode()){
             this.PopulateData(getIntent());
@@ -81,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onStart();
         final String message = GetMessageFromWorkflow();
         if (message != null){
-            findViewById(R.id.include).post(new Runnable() {
+            pageView.post(new Runnable() {
                 public void run() {
                     View pageView = findViewById(R.id.include);
                     Popup.ShowMessageWindow(getApplicationContext(), pageView, message);
@@ -105,27 +116,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         dateCalendar.setTime(itemDate);
     }
 
-    private void saveData(View view) {
-        Intent intent = new Intent(this, SaveDataActivity.class);
-        EditText editAmount = findViewById(R.id.editAmount);
-        EditText editDescription =  findViewById(R.id.editDescription);
-        Spinner editCategory = findViewById(R.id.editCategory);
-        EditText editDate =  findViewById(R.id.editDate);
-        Bundle dataBundle = new Bundle();
-        dataBundle.putString(this.getString(R.string.amount_property), editAmount.getText().toString());
-        dataBundle.putString(this.getString(R.string.description_property), editDescription.getText().toString());
-        dataBundle.putString(this.getString(R.string.category_property), editCategory.getSelectedItem().toString());
-        dataBundle.putString(this.getString(R.string.date_property), editDate.getText().toString());
-        if (InEditMode()) {
-            dataBundle.putInt(this.getString(R.string.line_item_id_property), getIntent().getIntExtra(this.getString(R.string.line_item_id_property), 0));
-            dataBundle.putBoolean(this.getString(R.string.in_edit_mode), true);
-        }
-        intent.putExtras(dataBundle);
+    private void SaveData() {
+        if (DataIsValid()) {
+            EditText editAmount = findViewById(R.id.editAmount);
+            EditText editDescription =  findViewById(R.id.editDescription);
+            Spinner editCategory = findViewById(R.id.editCategory);
+            EditText editDate =  findViewById(R.id.editDate);
+            Intent intent = new Intent(this, SaveDataActivity.class);
+            Bundle dataBundle = new Bundle();
+            dataBundle.putString(this.getString(R.string.amount_property), editAmount.getText().toString());
+            dataBundle.putString(this.getString(R.string.description_property), editDescription.getText().toString());
+            dataBundle.putString(this.getString(R.string.category_property), editCategory.getSelectedItem().toString());
+            dataBundle.putString(this.getString(R.string.date_property), editDate.getText().toString());
+            if (InEditMode()) {
+                dataBundle.putInt(this.getString(R.string.line_item_id_property), getIntent().getIntExtra(this.getString(R.string.line_item_id_property), 0));
+                dataBundle.putBoolean(this.getString(R.string.in_edit_mode), true);
+            }
+            intent.putExtras(dataBundle);
 
-        startActivity(intent);
+            startActivity(intent);
+        }
     }
 
-    private DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+    private final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
             dateCalendar.set(Calendar.YEAR, year);
@@ -185,6 +198,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivityForResult(dataListIntent, 0);
     }
 
+    private boolean DataIsValid(){
+        boolean returnValue = true;
+        for (View textView : pageViews){
+            if (textView instanceof EditText){
+                if (!TextIsValid((EditText)textView)){
+                    ((EditText) textView).setError(getString(R.string.required_field_error_message));
+                    returnValue = false;
+                }
+            }
+        }
+        return returnValue;
+    }
+
+    private boolean TextIsValid(EditText textView){
+        int len = textView.getText().length();
+        return textView.getText().length() > 0;
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {

@@ -37,6 +37,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         setContentView(R.layout.activity_list_data);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = MoneyDatabase.getDatabase(this);
         RecyclerView.LayoutManager dataListLayoutMgr;
 
@@ -98,7 +99,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
 
         public class BudgetItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             final TextView budgetItemDescriptionView;
-            TextView budgetItemDateView;
+            final TextView budgetItemDateView;
             TextView budgetItemCategoryView;
             TextView budgetItemAmountView;
 

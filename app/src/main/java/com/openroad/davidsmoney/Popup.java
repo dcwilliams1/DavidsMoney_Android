@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-public class Popup {
+class Popup {
     public static void ShowMessageWindow(Context context, View view, String message){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
         View messageWindow = inflater.inflate(R.layout.message_popup, null);
@@ -26,6 +26,7 @@ public class Popup {
         messageWindow.setOnTouchListener(new View.OnTouchListener(){
             @Override
             public boolean onTouch(View view, MotionEvent event){
+                view.performClick();
                 messagePopup.dismiss();
                 return true;
             }
