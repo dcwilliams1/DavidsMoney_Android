@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setIcon(R.drawable.money_icon_png);
         pageView = findViewById(R.id.include);
         pageViews = pageView.getFocusables(View.FOCUS_FORWARD);
 
