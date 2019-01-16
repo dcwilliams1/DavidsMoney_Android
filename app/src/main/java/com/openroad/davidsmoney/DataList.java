@@ -54,6 +54,23 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
                 budgetItemDataset = data;
                 dataListAdapter = new BudgetItemAdapter(budgetItemDataset);
                 dataListRecycler.setAdapter(dataListAdapter);
+                if (data.size() < 1){
+                    this.toggleListView(View.GONE);
+                    this.toggleEmptyDataMessage(View.VISIBLE);
+                } else {
+                    this.toggleListView(View.VISIBLE);
+                    this.toggleEmptyDataMessage(View.GONE);
+                }
+            }
+
+            private void toggleListView(int visibility){
+                RecyclerView dataList = findViewById(R.id.recycler_data_list);
+                dataList.setVisibility(visibility);
+            }
+
+            private void toggleEmptyDataMessage(int visibility){
+                TextView dataList = findViewById(R.id.view_empty_data_message);
+                dataList.setVisibility(visibility);
             }
         };
 
@@ -229,6 +246,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         }
         return failureMessage.toString();
     }
+
 }
 
 

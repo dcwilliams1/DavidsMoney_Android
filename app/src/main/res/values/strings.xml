@@ -30,6 +30,7 @@
     <string name="multiple_expense_deletion_failure_message">The expenses could not be removed from the list.</string>
     <string name="single_expense_deletion_failure_message">The expense could not be removed from the list.</string>
     <string name="required_field_error_message">Please provide information.</string>
+    <string name="empty_expense_list_message">There are no expenses to show.</string>
     <string-array name="budget_categories">
         <item>Big Toys</item>
         <item>Clothes</item>
