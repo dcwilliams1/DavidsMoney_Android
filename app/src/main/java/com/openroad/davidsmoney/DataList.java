@@ -47,12 +47,15 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
         dataListLayoutMgr = new LinearLayoutManager(this);
         dataListRecycler.setLayoutManager(dataListLayoutMgr);
 
+        dataListAdapter = new BudgetItemAdapter(budgetItemDataset);
+
         // Create the observer which updates the UI.
         budgetLineItemObserver = new Observer<List<BudgetLineItem>>() {
             @Override
             public void onChanged(@Nullable final List<BudgetLineItem> data) {
                 budgetItemDataset = data;
                 dataListAdapter = new BudgetItemAdapter(budgetItemDataset);
+
                 dataListRecycler.setAdapter(dataListAdapter);
                 if (data.size() < 1){
                     this.toggleListView(View.GONE);
@@ -111,7 +114,7 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
     }
 
     public class BudgetItemAdapter extends RecyclerView.Adapter<BudgetItemAdapter.BudgetItemViewHolder> {
-        private final List<BudgetLineItem> budgetItemDataset;
+        private List<BudgetLineItem> budgetItemDataset;
         private  Context appContext;
 
         public class BudgetItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -151,6 +154,8 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
 
                 startActivity(intent);
             }
+
+
         }
 
         BudgetItemAdapter(List<BudgetLineItem> BudgetItemDataSet) {
@@ -187,6 +192,10 @@ public class DataList extends AppCompatActivity implements AdapterView.OnItemSel
             } else {
                 return 0;
             }
+        }
+
+        public void setData(List<BudgetLineItem> data){
+            this.budgetItemDataset = data;
         }
     }
 
