@@ -1,4 +1,4 @@
-package com.openroad.davidsmoney;
+package com.openroad.davidsmoney.ui.datalist;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -18,10 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
+
+import com.openroad.davidsmoney.ui.MainActivity;
+import com.openroad.davidsmoney.R;
+import com.openroad.davidsmoney.database.BudgetLineItem;
+import com.openroad.davidsmoney.database.MoneyDatabase;
+import com.openroad.davidsmoney.ui.common.Converters;
+import com.openroad.davidsmoney.ui.common.Popup;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class DataList extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
     private RecyclerView dataListRecycler;

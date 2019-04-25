@@ -1,4 +1,4 @@
-package com.openroad.davidsmoney;
+package com.openroad.davidsmoney.database;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
@@ -8,6 +8,8 @@ import android.arch.persistence.room.TypeConverters;
 import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.support.annotation.NonNull;
+
+import com.openroad.davidsmoney.ui.common.Converters;
 
 @Database(entities = {BudgetLineItem.class}, version = 2)
 @TypeConverters({Converters.class})

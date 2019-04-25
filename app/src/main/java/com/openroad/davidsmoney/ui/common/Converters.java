@@ -1,10 +1,10 @@
-package com.openroad.davidsmoney;
+package com.openroad.davidsmoney.ui.common;
 
 import android.arch.persistence.room.TypeConverter;
 
 import java.util.Date;
 
-class Converters {
+public class Converters {
     @TypeConverter
     public static Date fromTimestamp(Long value) {
         return value == null ? null : new Date(value);

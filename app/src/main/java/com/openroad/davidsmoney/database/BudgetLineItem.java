@@ -1,4 +1,4 @@
-package com.openroad.davidsmoney;
+package com.openroad.davidsmoney.database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

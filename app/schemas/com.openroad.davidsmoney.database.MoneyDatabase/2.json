@@ -1,0 +1,57 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "b5c5096402e5b289d610c6a17f33626a",
+    "entities": [
+      {
+        "tableName": "BudgetLineItem",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`LineItemId` INTEGER PRIMARY KEY AUTOINCREMENT, `Description` TEXT, `Amount` INTEGER, `Category` TEXT, `Date` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "_lineItemId",
+            "columnName": "LineItemId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "_description",
+            "columnName": "Description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "_amount",
+            "columnName": "Amount",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "_category",
+            "columnName": "Category",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "_date",
+            "columnName": "Date",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "LineItemId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b5c5096402e5b289d610c6a17f33626a\")"
+    ]
+  }
+}

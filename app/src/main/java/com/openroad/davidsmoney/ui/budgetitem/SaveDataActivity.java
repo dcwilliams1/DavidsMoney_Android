@@ -1,9 +1,15 @@
-package com.openroad.davidsmoney;
+package com.openroad.davidsmoney.ui.budgetitem;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.openroad.davidsmoney.R;
+import com.openroad.davidsmoney.database.BudgetLineItem;
+import com.openroad.davidsmoney.database.MoneyDatabase;
+import com.openroad.davidsmoney.ui.MainActivity;
+import com.openroad.davidsmoney.ui.datalist.DataList;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;

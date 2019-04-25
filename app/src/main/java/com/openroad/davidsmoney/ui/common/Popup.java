@@ -1,4 +1,4 @@
-package com.openroad.davidsmoney;
+package com.openroad.davidsmoney.ui.common;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -9,9 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.openroad.davidsmoney.R;
+
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-class Popup {
+public class Popup {
     public static void ShowMessageWindow(Context context, View view, String message){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
         View messageWindow = inflater.inflate(R.layout.message_popup, null);
