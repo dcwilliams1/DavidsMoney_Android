@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.MainActivity"
+    tools:context=".ui.expense.SaveExpenseActivity"
     tools:layout_editor_absoluteX="24dp"
-    tools:layout_editor_absoluteY="102dp"
-    tools:showIn="@layout/activity_main">
+    tools:layout_editor_absoluteY="102dp">
 
     <EditText
         android:id="@+id/editDate"

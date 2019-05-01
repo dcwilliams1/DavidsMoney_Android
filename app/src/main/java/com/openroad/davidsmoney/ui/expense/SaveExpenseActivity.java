@@ -1,4 +1,4 @@
-package com.openroad.davidsmoney.ui.budgetitem;
+package com.openroad.davidsmoney.ui.expense;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +9,12 @@ import com.openroad.davidsmoney.R;
 import com.openroad.davidsmoney.database.BudgetLineItem;
 import com.openroad.davidsmoney.database.MoneyDatabase;
 import com.openroad.davidsmoney.ui.MainActivity;
-import com.openroad.davidsmoney.ui.datalist.DataList;
+import com.openroad.davidsmoney.ui.expenselist.ExpenseList;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class SaveDataActivity extends AppCompatActivity {
+public class SaveExpenseActivity extends AppCompatActivity {
 
     private MoneyDatabase db;
     private boolean InEditMode = false;
@@ -74,7 +74,7 @@ public class SaveDataActivity extends AppCompatActivity {
             Intent finishedSavingIntent = new Intent(this, MainActivity.class);
             finishedSavingIntent.setAction(Intent.ACTION_MAIN);
             if(InEditMode){
-                finishedSavingIntent.setClass(this, DataList.class);
+                finishedSavingIntent.setClass(this, ExpenseList.class);
                 finishedSavingIntent.setAction(Intent.ACTION_VIEW);
             }
 

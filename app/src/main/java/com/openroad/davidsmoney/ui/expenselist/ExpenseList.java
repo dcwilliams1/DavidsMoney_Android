@@ -1,4 +1,4 @@
-package com.openroad.davidsmoney.ui.datalist;
+package com.openroad.davidsmoney.ui.expenselist;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -30,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-public class DataList extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
+public class ExpenseList extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
     private RecyclerView dataListRecycler;
     private RecyclerView.Adapter dataListAdapter;
     private List<BudgetLineItem> budgetItemDataset;

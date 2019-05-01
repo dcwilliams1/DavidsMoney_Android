@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.budgetitem.SaveDataActivity"
+            android:name=".ui.expense.SaveExpenseActivity"
             android:parentActivityName=".ui.MainActivity"
             tools:targetApi="jelly_bean">
             <meta-data
@@ -29,7 +29,7 @@
                 android:value=".ui.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.datalist.DataList"
+            android:name=".ui.expenselist.ExpenseList"
             android:label="@string/title_activity_list_data"
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
