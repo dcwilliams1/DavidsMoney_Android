@@ -3,23 +3,24 @@ package com.openroad.davidsmoney.ui.expense
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.*
 
 import com.openroad.davidsmoney.R
 import com.openroad.davidsmoney.ui.expenselist.ExpenseList
-import kotlinx.android.synthetic.main.expense_detail.*
-import kotlinx.android.synthetic.main.fragment_edit_expense.*
+
 import java.text.SimpleDateFormat
 import java.util.*
-import android.widget.AdapterView
 
+import kotlinx.android.synthetic.main.expense_detail.*
+import kotlinx.android.synthetic.main.fragment_edit_expense.*
+import kotlinx.android.synthetic.main.category_spinner.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,26 +28,16 @@ import android.widget.AdapterView
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [ExpenseFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [ExpenseFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 public class EditExpenseFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private var budgetCategories: Array<String>? = null
+    private var budgetCategories: List<String>? = null
     private val dateCalendar = Calendar.getInstance()
-    private var editDate: EditText? = null
     private var pageView: View? = null
-    private var pageViews: List<View>? = null
+    private var pageViews: ArrayList<View>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,48 +50,6 @@ public class EditExpenseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-//        pageViews = include?.getFocusables(View.FOCUS_FORWARD)
-//
-//        val resources = resources
-//
-//        val categoryDropdown = editCategory
-//        categoryDropdown.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>, view: View,
-//                                        position: Int, id: Long) {
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>) {
-//
-//            }
-//        })
-//
-//        budgetCategories = resources.getStringArray(R.array.budget_categories);
-//        val categoryArrayAdapter: ArrayAdapter<String> = ArrayAdapter(getActivity(), categoryDropdown.id, budgetCategories)
-//        categoryDropdown.setAdapter(categoryArrayAdapter)
-//
-//        editDate?.setOnClickListener( { DatePickerDialog(getActivity(), date, dateCalendar.get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH), dateCalendar.get(Calendar.DAY_OF_MONTH)).show() })
-//
-//        saveButton.setOnClickListener( { SaveData() })
-//
-//        pageViews?.forEach() {
-//            if (pageView is EditText) {
-//                (pageView as EditText).onFocusChangeListener = View.OnFocusChangeListener { textView, hasFocus ->
-//                    if (!hasFocus && TextIsValid(textView as EditText)) {
-//                        (textView as TextView).error = null
-//                    }
-//                }
-//            }
-//        }
-//
-//        if (InEditMode()) {
-//            this.PopulateData(getActivity()!!.getIntent())
-//            val cancelButton = cancelButton
-//            cancelButton.setVisibility(View.VISIBLE)
-//            cancelButton.setOnClickListener(View.OnClickListener { ShowBudgetItemList() })
-//            saveButton.setText(R.string.update_button_label)
-//        }
-//        editDate!!.requestFocus()
-
         return inflater.inflate(R.layout.fragment_edit_expense, container, false)
     }
 
@@ -109,8 +58,7 @@ public class EditExpenseFragment : Fragment() {
 
         val resources = resources
 
-        val categoryDropdown = editCategory
-        categoryDropdown.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+        editCategory.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View,
                                         position: Int, id: Long) {
             }
@@ -120,9 +68,9 @@ public class EditExpenseFragment : Fragment() {
             }
         })
 
-        budgetCategories = resources.getStringArray(R.array.budget_categories);
-        val categoryArrayAdapter: ArrayAdapter<String> = ArrayAdapter(getActivity(), categoryDropdown.id, budgetCategories)
-        categoryDropdown.setAdapter(categoryArrayAdapter)
+        budgetCategories = resources.getStringArray(R.array.budget_categories).toList();
+        val categoryArrayAdapter: ArrayAdapter<String> = ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, budgetCategories)
+        editCategory.setAdapter(categoryArrayAdapter)
 
         editDate?.setOnClickListener( { DatePickerDialog(getActivity(), date, dateCalendar.get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH), dateCalendar.get(Calendar.DAY_OF_MONTH)).show() })
 
