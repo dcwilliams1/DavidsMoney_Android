@@ -6,9 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.*
 
@@ -45,7 +43,7 @@ public class EditExpenseFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -94,6 +92,23 @@ public class EditExpenseFragment : Fragment() {
             saveButton.setText(R.string.update_button_label)
         }
         editDate!!.requestFocus()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu, menuInflater)
+        menuInflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> return true
+            R.id.data_list -> {
+                ShowBudgetItemList()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
